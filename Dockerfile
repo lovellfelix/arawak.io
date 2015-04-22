@@ -1,6 +1,6 @@
-FROM dockerfile/nodejs
+FROM node:slim
 
-MAINTAINER Matthias Luebken, matthias@catalyst-zero.com
+MAINTAINER Lovell Felix, hello@lovellfelix.com
 
 WORKDIR /home/mean
 
