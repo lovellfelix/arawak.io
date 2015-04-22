@@ -10,10 +10,10 @@ var mongoose = require('mongoose'),
  * Hut Schema
  */
 var HutSchema = new Schema({
-	name: {
+	hostname: {
 		type: String,
 		default: '',
-		required: 'Please fill Hut name',
+		required: 'Please fill hostname',
 		trim: true
 	},
 	created: {

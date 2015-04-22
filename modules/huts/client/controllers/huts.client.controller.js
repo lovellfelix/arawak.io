@@ -9,7 +9,8 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 		$scope.create = function() {
 			// Create new Hut object
 			var hut = new Huts ({
-				name: this.name
+				hostname: this.hostname
+
 			});
 
 			// Redirect after save
@@ -17,7 +18,7 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 				$location.path('huts/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.hostname = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -57,7 +58,7 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 
 		// Find existing Hut
 		$scope.findOne = function() {
-			$scope.hut = Huts.get({ 
+			$scope.hut = Huts.get({
 				hutId: $stateParams.hutId
 			});
 		};
