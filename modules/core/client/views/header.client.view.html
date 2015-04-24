@@ -6,7 +6,10 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a data-ui-sref="home" class="navbar-brand">Arawak</a>
+
+		<a data-ng-hide="authentication.user" data-ui-sref="home" class="navbar-brand">Arawak</a>
+		<a data-ng-show="authentication.user" data-ui-sref="huts.list" class="navbar-brand">Arawak</a>
+
 	</div>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">

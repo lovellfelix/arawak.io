@@ -39,5 +39,9 @@ module.exports = {
 				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
 			}
 		}
+	},
+	docker: {
+		serviceKey: process.env.DOCKER_SERVICE_KEY ||'Rh5Lu0liocbgeMKw8iu51d3kASvaN0b6p/t',
+		apiEndPoint: process.env.DOCKER_API_END_POINT ||'http://45.55.162.183:8080/api/'
 	}
 };

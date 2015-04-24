@@ -1,8 +1,8 @@
 'use strict';
 
 // Huts controller
-angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts',
-	function($scope, $stateParams, $location, Authentication, Huts ) {
+angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts', 'Docker',
+	function($scope, $stateParams, $location, Authentication, Huts, Docker) {
 		$scope.authentication = Authentication;
 
 		// Create new Hut
@@ -62,5 +62,18 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 				hutId: $stateParams.hutId
 			});
 		};
+
+
+		// Find existing Hut
+		$scope.listHuts = function() {
+			$scope.huts = Docker.list();
+
+		};
+
+		//
+		// Docker.getAll().success(function(data){
+	  //       $scope.items=data.results;
+	  //   });
+
 	}
 ]);
