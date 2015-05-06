@@ -23,7 +23,7 @@
 <section data-ng-controller="HutsController" data-ng-init="listHuts()">
 
   <span data-ng-repeat="hut in huts">
-    hello world
+    <span data-ng-bind="hut.url"> </span>
   </span>
 
 </section>

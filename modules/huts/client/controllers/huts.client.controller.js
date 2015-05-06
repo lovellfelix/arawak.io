@@ -66,7 +66,7 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 
 		// Find existing Hut
 		$scope.listHuts = function() {
-			$scope.huts = Docker.list();
+			$scope.huts = Docker.query();
 
 		};
 
