@@ -1,8 +1,8 @@
 'use strict';
 
 // Huts controller
-angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts', 'Docker',
-	function($scope, $stateParams, $location, Authentication, Huts, Docker) {
+angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts',
+	function($scope, $stateParams, $location, Authentication, Huts) {
 		$scope.authentication = Authentication;
 
 		// Create new Hut
