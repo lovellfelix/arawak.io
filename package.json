@@ -1,19 +1,19 @@
 {
-  "name": "meanjs",
-  "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
-  "version": "0.4.0",
-  "private": false,
-  "author": "https://github.com/meanjs/mean/graphs/contributors",
+  "name": "Arawak",
+  "description": "",
+  "version": "0.0.1",
+  "private": true,
+  "author": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/meanjs/mean.git"
+    "url": ""
   },
   "engines": {
     "node": "0.12.x",
     "npm": "2.12.x"
   },
   "scripts": {
-    "start": "grunt",
+    "start": "gulp",
     "test": "grunt test",
     "postinstall": "bower install --config.interactive=false"
   },
