@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || '45.55.162.183') + '/arawak-space',
+	//db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || '45.55.162.183') + '/arawak-space',
+  db: 'mongodb://lovell:1234@ds047720.mongolab.com:47720/arawak-space',
 	app: {
 		title: 'MEAN.JS - Development Environment'
 	},
