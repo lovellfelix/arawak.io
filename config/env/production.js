@@ -30,11 +30,40 @@ module.exports = {
     mailer: {
         from: process.env.MAILER_FROM || 'MAILER_FROM',
         options: {
-            service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+            service: process.env.MAILER_SERVICE_PROVIDER || 'mailgun',
             auth: {
-                user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-                pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+                user: process.env.MAILER_EMAIL_ID || 'postmaster@arawak.io',
+                pass: process.env.MAILER_PASSWORD || '6419c93af51af068b671c02e288a0934'
             }
         }
-    }
+    },
+    
+    stripeOptions: {
+        apiKey: process.env.STRIPE_KEY || 'sk_test_kaVJ6FqJRCkecspVho9K7u3q',
+        stripePubKey: process.env.STRIPE_PUB_KEY || 'pk_test_XdVDGxpniL8niWpo2N8pp5E5',
+        defaultPlan: 'free',
+        plans: ['free', 'silver', 'gold', 'platinum'],
+        planData: {
+          'free': {
+            name: 'Free',
+            price: 0
+          },
+          'silver': {
+            name: 'Silver',
+            price: 9
+          },
+          'gold': {
+            name: 'Gold',
+            price: 19
+          },
+          'platinum': {
+            name: 'Platinum',
+            price: 29
+          }
+        }
+      },: {
+        user: process.env.MAILGUN_USER || 'postmaster@arawak.io',
+        password: process.env.MAILGUN_PASSWORD || '6419c93af51af068b671c02e288a0934'
+      }
+
 };
