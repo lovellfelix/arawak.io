@@ -1,10 +1,9 @@
 'use strict';
 
 module.exports = {
-	//db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || '45.55.162.183') + '/arawak-space',
-  db: 'mongodb://lovell:1234@ds047720.mongolab.com:47720/arawak-space',
+	db: 'mongodb://localhost/arawak-space',
 	app: {
-		title: 'MEAN.JS - Development Environment'
+		title: 'Arawak - Development Environment'
 	},
 	facebook: {
         clientID: process.env.FACEBOOK_ID || 'APP_ID',
@@ -41,7 +40,7 @@ module.exports = {
 			}
 		}
 	},
-	
+
     stripeOptions: {
         apiKey: process.env.STRIPE_KEY || 'sk_test_kaVJ6FqJRCkecspVho9K7u3q',
         stripePubKey: process.env.STRIPE_PUB_KEY || 'pk_test_XdVDGxpniL8niWpo2N8pp5E5',
