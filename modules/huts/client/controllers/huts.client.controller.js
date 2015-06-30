@@ -62,18 +62,5 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 				hutId: $stateParams.hutId
 			});
 		};
-
-
-		// Find existing Hut
-		$scope.listHuts = function() {
-			$scope.huts = Docker.query();
-
-		};
-
-		//
-		// Docker.getAll().success(function(data){
-	  //       $scope.items=data.results;
-	  //   });
-
 	}
 ]);
