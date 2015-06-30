@@ -65,8 +65,5 @@ module.exports = {
             price: 29
           }
         }
-      },: {
-        user: process.env.MAILGUN_USER || 'postmaster@arawak.io',
-        password: process.env.MAILGUN_PASSWORD || '6419c93af51af068b671c02e288a0934'
       }
 };
