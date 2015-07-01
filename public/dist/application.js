@@ -51,6 +51,11 @@ ApplicationConfiguration.registerModule('core');
 'use strict';
 
 // Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('dashboard');
+
+'use strict';
+
+// Use applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('huts');
 'use strict';
 
@@ -326,6 +331,27 @@ angular.module('core').service('Socket', ['Authentication', '$state', '$timeout'
     }
 ]);
 
+'use strict';
+
+//Setting up route
+angular.module('dashboard').config(['$stateProvider',
+	function($stateProvider) {
+		// Dashboard state routing
+		$stateProvider.
+		state('dashboard', {
+			url: '/dashboard',
+			templateUrl: 'modules/dashboard/views/dashboard.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+angular.module('dashboard').controller('DashboardController', ['$scope',
+	function($scope) {
+		// Dashboard controller logic
+		// ...
+	}
+]);
 'use strict';
 
 // Configuring the Huts module
