@@ -1,3 +1,23 @@
-<section data-ng-controller="DashboardController">
+<!-- <section data-ng-controller="DashboardController">
 	This is the Dashboard
+</section> -->
+
+<section data-ng-controller="HutsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Your Hut</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="hut in huts" data-ng-href="/#!/huts/{{hut._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="hut.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="hut.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="hut.hostname"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!huts.$resolved || huts.length">
+    	You haven't setup any Huts as yet, why don't you <a href="/#!/huts/create">create one</a>?
+    </div>
 </section>
