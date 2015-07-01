@@ -5,12 +5,14 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
-				'public/lib/material-design-lite/material.min.css'
+				'public/lib/angular-material/angular-material.css'
 			],
 			js: [
 				'public/lib/angular/angular.js',
+				'public/lib/angular-aria/angular-aria.js',
 				'public/lib/angular-resource/angular-resource.js',
 				'public/lib/angular-animate/angular-animate.js',
+				'public/lib/angular-material/angular-material.js',
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
