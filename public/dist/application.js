@@ -416,12 +416,12 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 
 
 		$scope.prop = {
-		    "type": "select",
-		    "name": "Service",
-		    "value": "Service 3",
-		    "values": [ "Service 1", "Service 2", "Service 3", "Service 4"]
+		    'type': 'select',
+		    'name': 'Service',
+		    'value': 'Service 3',
+		    'values': [ 'Service 1', 'Service 2', 'Service 3', 'Service 4']
 		  };
-			
+
 		// Create new Hut
 		$scope.create = function() {
 			// Create new Hut object
