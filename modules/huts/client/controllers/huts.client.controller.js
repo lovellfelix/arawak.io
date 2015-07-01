@@ -5,11 +5,20 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 	function($scope, $stateParams, $location, Authentication, Huts) {
 		$scope.authentication = Authentication;
 
+
+		$scope.prop = {
+		    "type": "select",
+		    "name": "Service",
+		    "value": "Service 3",
+		    "values": [ "Service 1", "Service 2", "Service 3", "Service 4"]
+		  };
+			
 		// Create new Hut
 		$scope.create = function() {
 			// Create new Hut object
 			var hut = new Huts ({
-				hostname: this.hostname
+				name: this.name,
+				product: this.product
 
 			});
 
@@ -18,7 +27,7 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 				$location.path('huts/' + response._id);
 
 				// Clear form fields
-				$scope.hostname = '';
+				$scope.name = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
