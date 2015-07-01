@@ -500,6 +500,10 @@ angular.module('users').config(['$stateProvider',
 	function ($stateProvider) {
 		// Users state routing
 		$stateProvider.
+		state('settings.security', {
+			url: '/security',
+			templateUrl: 'modules/users/views/settings/security.client.view.html'
+		}).
 			state('settings', {
 				abstract: true,
 				url: '/settings',
