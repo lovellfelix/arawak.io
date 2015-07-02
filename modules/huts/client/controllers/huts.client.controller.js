@@ -1,8 +1,8 @@
 'use strict';
 
 // Huts controller
-angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts',
-	function($scope, $stateParams, $location, Authentication, Huts) {
+angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts', 'Socket',
+	function($scope, $stateParams, $location, Authentication, Huts, Socket) {
 		$scope.authentication = Authentication;
 
 
@@ -71,5 +71,14 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 				hutId: $stateParams.hutId
 			});
 		};
+
+		// Create a controller method for sending messages
+		$scope.writeFile = function() {
+			// Create a new message object
+				var message = {
+						text: this.messageText
+				};
+			};	
+
 	}
 ]);

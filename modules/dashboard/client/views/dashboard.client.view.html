@@ -6,6 +6,34 @@
     <div class="page-header">
         <h1>Your Hut</h1>
     </div>
+
+<!-- <span data-ng-controller="ChatController">
+    <form class="col-xs-12 col-md-offset-2 col-md-4"  ng-submit="sendMessage();">
+      <fieldset class="row">
+        <div class="input-group">
+          <input type="text" id="messageText" name="messageText" class="form-control" data-ng-model="messageText" placeholder="Enter new message">
+                  <span class="input-group-btn">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                  </span>
+        </div>
+      </fieldset>
+    </form>
+
+    <ul class="list-unstyled">
+    <li class="col-xs-12 col-md-offset-4 col-md-4 chat-message" data-ng-repeat="message in messages">
+        <small class="pull-right text-muted" data-ng-bind="message.created | date:'mediumTime'"></small>
+        <img data-ng-src="{{message.profileImageURL}}" alt="{{message.username}}" class="pull-left chat-profile-image"/>
+        <div class="pull-left chat-message-details">
+            <strong data-ng-bind="message.username"></strong><br>
+            <span data-ng-bind="message.text"></span>
+        </div>
+    </li>
+    </ul>
+
+</span> -->
+    <br />
+    <br />
+
     <div class="list-group">
         <a data-ng-repeat="hut in huts" data-ng-href="/#!/huts/{{hut._id}}" class="list-group-item">
 			<small class="list-group-item-text">
