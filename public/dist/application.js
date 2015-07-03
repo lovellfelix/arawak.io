@@ -46,6 +46,11 @@ angular.element(document).ready(function() {
 'use strict';
 
 // Use Applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('admin');
+
+'use strict';
+
+// Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('chat');
 
 'use strict';
@@ -66,6 +71,134 @@ ApplicationConfiguration.registerModule('huts');
 
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');
+
+'use strict';
+
+// Configuring the Articles module
+angular.module('admin').run(['Menus',
+	function(Menus) {
+		// Add the articles dropdown item
+		Menus.addMenuItem('topbar', {
+			title: 'Admin',
+			state: 'admin',
+			type: 'dropdown',
+			roles: ['admin']
+		});
+
+		// Add the dropdown list item
+		Menus.addSubMenuItem('topbar', 'admin', {
+			title: 'List Users',
+			state: 'admin.list'
+		});
+	}
+]);
+
+'use strict';
+
+// Setting up route
+angular.module('admin').config(['$stateProvider',
+	function($stateProvider) {
+		// Articles state routing
+		$stateProvider.
+		state('admin', {
+			abstract: true,
+			url: '/admin',
+			template: '<ui-view/>'
+		}).
+		state('admin.list', {
+			url: '/list',
+			templateUrl: 'modules/admin/views/list-users.client.view.html'
+		}).
+		state('admin.view', {
+			url: '/:userId',
+			templateUrl: 'modules/admin/views/view-user.client.view.html'
+		}).
+		state('admin.edit', {
+			url: '/edit/:userId',
+			templateUrl: 'modules/admin/views/edit-user.client.view.html'
+		});
+	}
+]);
+
+'use strict';
+
+angular.module('admin').controller('AdminController', ['$scope', '$stateParams', '$state', '$filter', '$location', 'Authentication', 'Admin',
+	function($scope, $stateParams, $state, $filter, $location, Authentication, Admin) {
+		$scope.authentication = Authentication;
+
+		$scope.remove = function(user) {
+			if(confirm('Are you sure you want to delete this user?')) {
+				if (user) {
+					user.$remove();
+
+					$scope.adminusers.splice($scope.adminusers.indexOf(user),1);
+
+				} else {
+					$scope.adminuser.$remove(function() {
+						$state.go('admin.list');
+					});
+				}
+			}
+		};
+
+		$scope.update = function() {
+			var user = $scope.adminuser;
+
+			user.$update(function() {
+				$location.path('admin/' + user._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		$scope.find = function() {
+			 Admin.query(function (data) {
+				 $scope.adminusers = data;
+				$scope.buildPager();
+			});
+		};
+
+		$scope.findOne = function() {
+			$scope.adminuser = Admin.get({
+				userId: $stateParams.userId
+			});
+		};
+
+		$scope.buildPager = function () {
+			$scope.pagedItems = [];
+			$scope.itemsPerPage = 15;
+			$scope.currentPage = 1;
+			$scope.figureOutItemsToDisplay();
+		};
+
+		$scope.figureOutItemsToDisplay = function () {
+			$scope.filteredItems = $filter('filter')($scope.adminusers, { $: $scope.search});
+			$scope.filterLength = $scope.filteredItems.length;
+			var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+			var end = begin + $scope.itemsPerPage;
+			$scope.pagedItems = $scope.filteredItems.slice(begin, end);
+		};
+
+		$scope.pageChanged = function() {
+			$scope.figureOutItemsToDisplay();
+		};
+	}
+]);
+
+'use strict';
+
+//Articles service used for communicating with the articles REST endpoints
+angular.module('admin').factory('Admin', ['$resource',
+	function($resource) {
+		return $resource('api/admin/:userId', {
+			userId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+]);
 
 'use strict';
 
