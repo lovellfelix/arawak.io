@@ -1,6 +1,6 @@
 <section data-ng-controller="HutsController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="hut.hostname"></h1>
+		<h1 data-ng-bind="hut.name"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user._id == hut.user._id">
 		<a class="btn btn-primary" href="/#!/huts/{{hut._id}}/edit">
