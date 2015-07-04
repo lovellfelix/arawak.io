@@ -5,7 +5,7 @@ angular.module('huts').filter('Huts', [
 		return function(input) {
 			// Huts directive logic
 			// ...
-			var hut = $scope.hut ;
+			// var hut = $scope.hut ;
 
 			return 'Huts filter: ' + input;
 		};
