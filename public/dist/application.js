@@ -88,7 +88,7 @@ angular.module('admin').run(['Menus',
 		// Add the dropdown list item
 		Menus.addSubMenuItem('topbar', 'admin', {
 			title: 'List Users',
-			state: 'admin.list'
+			state: 'admin.users'
 		});
 	}
 ]);
@@ -105,8 +105,8 @@ angular.module('admin').config(['$stateProvider',
 			url: '/admin',
 			template: '<ui-view/>'
 		}).
-		state('admin.list', {
-			url: '/list',
+		state('admin.users', {
+			url: '/users',
 			templateUrl: 'modules/admin/views/list-users.client.view.html'
 		}).
 		state('admin.view', {
