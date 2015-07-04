@@ -10,8 +10,8 @@ angular.module('admin').config(['$stateProvider',
 			url: '/admin',
 			template: '<ui-view/>'
 		}).
-		state('admin.list', {
-			url: '/list',
+		state('admin.users', {
+			url: '/users',
 			templateUrl: 'modules/admin/views/list-users.client.view.html'
 		}).
 		state('admin.view', {
