@@ -7,7 +7,7 @@ angular.module('admin').config(['$stateProvider',
 		$stateProvider.
 		state('admin', {
 			abstract: true,
-			url: '/admin',
+			url: 'dashboard/admin',
 			template: '<ui-view/>'
 		}).
 		state('admin.users', {
