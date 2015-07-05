@@ -40,14 +40,17 @@
 				<a href="#" class="dropdown-toggle user-header-dropdown-toggle" data-toggle="dropdown">
 
 					<img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header--nav__profile-image"/>
-          <span class="header--nav__profile__name">{{authentication.user.displayName }}</span>
+          <span class="header--nav__profile-name">{{authentication.user.displayName }}</span>
 				 <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
 					<li data-ui-sref-active="active">
-						<a data-ui-sref="settings.profile">Edit Profile</a>
+						<a data-ui-sref="settings.profile">Profile</a>
 					</li>
-					<li data-ui-sref-active="active">
+					<li data-ui-sref-active="active" data-ng-show="authentication.user.provider === 'local'">
+						<a data-ui-sref="admin.users">Control Panel</a>
+					</li>
+					<!-- <li data-ui-sref-active="active">
 						<a data-ui-sref="settings.picture">Change Profile Picture</a>
 					</li>
 					<li data-ui-sref-active="active" data-ng-show="authentication.user.provider === 'local'">
@@ -55,7 +58,7 @@
 					</li>
 					<li data-ui-sref-active="active">
 						<a data-ui-sref="settings.accounts">Manage Social Accounts</a>
-					</li>
+					</li> -->
 					<li class="divider"></li>
 					<li>
 						<a href="/api/auth/signout" target="_self">Signout</a>
