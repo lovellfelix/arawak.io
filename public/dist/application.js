@@ -69,6 +69,10 @@ ApplicationConfiguration.registerModule('dashboard');
 ApplicationConfiguration.registerModule('huts');
 'use strict';
 
+// Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('servers');
+'use strict';
+
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');
 
@@ -722,6 +726,121 @@ angular.module('huts').factory('Huts', ['$resource',
 	}
 ]);
 
+'use strict';
+
+//Setting up route
+angular.module('servers').config(['$stateProvider',
+	function($stateProvider) {
+		// Servers state routing
+		$stateProvider.
+		state('servers', {
+			abstract: true,
+			url: '/servers',
+			template: '<ui-view/>'
+		}).
+		state('servers.list', {
+			url: '',
+			templateUrl: 'modules/servers/views/list-servers.client.view.html'
+		}).
+		state('servers.create', {
+			url: '/create',
+			templateUrl: 'modules/servers/views/create-server.client.view.html'
+		}).
+		state('servers.view', {
+			url: '/:serverId',
+			templateUrl: 'modules/servers/views/view-server.client.view.html'
+		}).
+		state('servers.edit', {
+			url: '/:serverId/edit',
+			templateUrl: 'modules/servers/views/edit-server.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+// Servers controller
+angular.module('servers').controller('ServersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Servers',
+	function($scope, $stateParams, $location, Authentication, Servers ) {
+		$scope.authentication = Authentication;
+
+		// Create new Server
+		$scope.create = function() {
+			// Create new Server object
+			var server = new Servers ({
+				name: this.name,
+				hostname: this.hostname,
+				username: this.username,
+				password: this.password
+			});
+
+			// Redirect after save
+			server.$save(function(response) {
+				$location.path('servers/' + response._id);
+
+				// Clear form fields
+				$scope.name = '';
+				$scope.hostname = '';
+				$scope.username = '';
+				$scope.password = '';
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Remove existing Server
+		$scope.remove = function( server ) {
+			if ( server ) { server.$remove();
+
+				for (var i in $scope.servers ) {
+					if ($scope.servers [i] === server ) {
+						$scope.servers.splice(i, 1);
+					}
+				}
+			} else {
+				$scope.server.$remove(function() {
+					$location.path('servers');
+				});
+			}
+		};
+
+		// Update existing Server
+		$scope.update = function() {
+			var server = $scope.server ;
+
+			server.$update(function() {
+				$location.path('servers/' + server._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Find a list of Servers
+		$scope.find = function() {
+			$scope.servers = Servers.query();
+		};
+
+		// Find existing Server
+		$scope.findOne = function() {
+			$scope.server = Servers.get({
+				serverId: $stateParams.serverId
+			});
+		};
+	}
+]);
+
+'use strict';
+
+//Servers service used to communicate Servers REST endpoints
+angular.module('servers').factory('Servers', ['$resource',
+	function($resource) {
+		return $resource('api/servers/:serverId', { serverId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+]);
 'use strict';
 
 // Config HTTP Error Handling
