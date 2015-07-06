@@ -1,0 +1,21 @@
+<section data-ng-controller="ServersController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Servers</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="server in servers" data-ng-href="/#!/servers/{{server._id}}" class="list-group-item">
+          <h4 class="list-group-item-heading" data-ng-bind="server.name"></h4>
+          <p data-ng-bind="server.hostname"></p>
+
+			<small class="list-group-item-text">
+				Added
+				<span data-ng-bind="server.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="server.user.displayName"></span>
+			</small>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!servers.$resolved || servers.length">
+    	No Servers yet, why don't you <a href="/#!/servers/create">create one</a>?
+    </div>
+</section>

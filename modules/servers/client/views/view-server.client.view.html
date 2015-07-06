@@ -1,0 +1,24 @@
+<section data-ng-controller="ServersController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="server.name"></h1>
+		<h4 data-ng-bind="server.hostname"></h4>
+		<span data-ng-bind="server.username"></span>
+		<span data-ng-bind="server.password"></span>
+	</div>
+	<div class="pull-right" data-ng-show="authentication.user._id == server.user._id">
+		<a class="btn btn-primary" href="/#!/servers/{{server._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="server.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="server.user.displayName"></span>
+		</em>
+	</small>
+</section>
