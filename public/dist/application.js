@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'mean';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap', 'ui.utils', 'angularFileUpload', 'ngMaterial'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap', 'ui.utils', 'angularFileUpload', 'ngMaterial', 'ui.gravatar'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -102,7 +102,7 @@ angular.module('admin').config(['$stateProvider',
 		$stateProvider.
 		state('admin', {
 			abstract: true,
-			url: '/admin',
+			url: 'dashboard/admin',
 			template: '<ui-view/>'
 		}).
 		state('admin.users', {
@@ -691,6 +691,20 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 				};
 			};	
 
+	}
+]);
+
+'use strict';
+
+angular.module('huts').filter('Huts', [
+	function() {
+		return function(input) {
+			// Huts directive logic
+			// ...
+			// var hut = $scope.hut ;
+
+			return 'Huts filter: ' + input;
+		};
 	}
 ]);
 
