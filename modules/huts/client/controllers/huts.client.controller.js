@@ -5,14 +5,6 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 	function($scope, $stateParams, $location, Authentication, Huts, Socket) {
 		$scope.authentication = Authentication;
 
-		var socket = io.connect('/');
-
-		$scope.prop = {
-		    'type': 'select',
-		    'name': 'Service',
-		    'value': 'Service 3',
-		    'values': [ 'Service 1', 'Service 2', 'Service 3', 'Service 4']
-		  };
 
 		// Create new Hut
 		$scope.create = function() {
@@ -73,16 +65,25 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 			});
 		};
 
+		// Socket.on('dbCreate', function(data) {
+		// 		//$scope.messages.unshift(message);
+		// });
+		//
 
 			$scope.dbCreate = function(){
-					// var dbName = document.getElementById('dbname').value;
-
+					 var name = document.getElementById('name').value;
 					// var dbType = document.getElementById('dbtype').value;
+					// var dbName = 'lovell',
+						var	dbType ='monogodb';
 
-						socket.emit('dbCreate', {name: 'lovell', type: 'mysql'});
-						// window.setTimeout('location.reload()', 1000);
+						Socket.emit('dbCreate', {name: name, type: dbType});
 
 				};
+
+				// Remove the event listener when the controller instance is destroyed
+      $scope.$on('$destroy', function() {
+            Socket.removeListener('dbCreate');
+      });
 
 	}
 ]);

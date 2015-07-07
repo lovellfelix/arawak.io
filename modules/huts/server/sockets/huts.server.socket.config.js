@@ -8,18 +8,21 @@ Writable = require('stream').Writable;
 
 // Create the chat configuration
 module.exports = function(io, socket) {
-  io.sockets.on('connection', function(socket){
 
-    socket.on('dbCreate',function(data){
+    socket.on('dbCreate', function(req, res){
 
-    // exec('ls', 'dokku@arawak.space').pipe(process.stdout);
-    var name=data.name;
-    var type=data.type;
-    exec('dokku '+type+':create '+name, 'dokku@arawak.space').pipe(process.stdout);
+    //exec('clone lovelltest https://github.com/heroku/node-js-sample', 'dokku@arawak.space').pipe(process.stdout);
+    var name=req.name;
+    //var type=res.type;
+    exec('clone '+name + ' https://github.com/heroku/node-js-sample', 'dokku@arawak.space').pipe(process.stdout);
+
+    // process.stdin
+    //   .pipe(exec('echo try typing something; cat -', 'dokku@arawak.space'))
+    //   .pipe(process.stdout);
+
     });
 
 
-    });
 
 
 };
