@@ -620,6 +620,7 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 	function($scope, $stateParams, $location, Authentication, Huts, Socket) {
 		$scope.authentication = Authentication;
 
+		var socket = io.connect('/');
 
 		$scope.prop = {
 		    'type': 'select',
@@ -687,13 +688,16 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 			});
 		};
 
-		// Create a controller method for sending messages
-		$scope.writeFile = function() {
-			// Create a new message object
-				var message = {
-						text: this.messageText
+
+			$scope.dbCreate = function(){
+					// var dbName = document.getElementById('dbname').value;
+
+					// var dbType = document.getElementById('dbtype').value;
+
+						socket.emit('dbCreate', {name: 'lovell', type: 'mysql'});
+						// window.setTimeout('location.reload()', 1000);
+
 				};
-			};	
 
 	}
 ]);
@@ -961,7 +965,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				$scope.authentication.user = response;
 
 				// And redirect to the index page
-				$location.path('/huts/create');
+				$location.path('/dashboard');
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
