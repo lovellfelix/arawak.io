@@ -70,19 +70,19 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 		// });
 		//
 
-			$scope.dbCreate = function(){
+			$scope.createHut = function(){
 					 var name = document.getElementById('name').value;
 					// var dbType = document.getElementById('dbtype').value;
 					// var dbName = 'lovell',
 						var	dbType ='monogodb';
 
-						Socket.emit('dbCreate', {name: name, type: dbType});
+						Socket.emit('createHut', {name: name, type: dbType});
 
 				};
 
 				// Remove the event listener when the controller instance is destroyed
       $scope.$on('$destroy', function() {
-            Socket.removeListener('dbCreate');
+            Socket.removeListener('createHut');
       });
 
 	}

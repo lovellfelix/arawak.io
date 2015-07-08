@@ -9,7 +9,7 @@ Writable = require('stream').Writable;
 // Create the chat configuration
 module.exports = function(io, socket) {
 
-    socket.on('dbCreate', function(req, res){
+    socket.on('createHut', function(req, res){
 
     //exec('clone lovelltest https://github.com/heroku/node-js-sample', 'dokku@arawak.space').pipe(process.stdout);
     var name=req.name;
