@@ -9,21 +9,21 @@ case "$1" in
   arawak:install)
     verify_app_name "$2"
     verify_max_args 2 "$@"
-    
- 	info "Creating application..."
 
- 	dokku create "$APP"
- 	info "Clonning sources into $APP_DIR..."
+    info "Creating application..."
 
- 	cd "$APP_DIR"
- 	git fetch "$ARAWAK_REPOSITORY"
+    dokku create "$APP"
+    info "Clonning sources into $APP_DIR..."
 
- 	info "Creating database..."
+    cd "$APP_DIR"
+    git fetch "$ARAWAK_REPOSITORY"
 
-	dokku mongodb:create "$APP"
+    info "Creating database..."
+
+    dokku mongodb:create "$APP"
     dokku mongodb:link "$APP" "$APP"
 
-	info "Creating environment variables..."
+    info "Creating environment variables..."
     dokku config:set "$APP" "NODE_ENV=production"
 
     info "Building application..."
@@ -38,16 +38,17 @@ case "$1" in
     verify_app_name "$2"
     verify_max_args 2 "$@"
 
-	dokku mongodb:delete "$APP"
-	dokku delete "$APP"
+    dokku mongodb:delete "$APP"
+    dokku delete "$APP"
 
-	;;
+    ;;
 
   help)
     cat && cat<<EOF
     arawak:install <app>       Create application
     arawak:remove <app>        Remove appliccation
-    ;;
+EOF   
+  ;;
 
   *)
     exit $DOKKU_NOT_IMPLEMENTED_EXIT
