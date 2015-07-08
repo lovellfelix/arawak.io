@@ -5,11 +5,9 @@ source "$(dirname $0)/../dokku_common"
 ARAWAK_REPOSITORY="https://github.com/heroku/node-js-sample"
 
 case "$1" in
-
   arawak:install)
     verify_app_name "$2"
     verify_max_args 2 "$@"
-
     info "Creating application..."
 
     dokku create "$APP"
@@ -30,25 +28,21 @@ case "$1" in
 
     dokku rebuild "$APP"
     info "Everything is done!"
-
     ;;
 
   arawak:remove)
-
     verify_app_name "$2"
     verify_max_args 2 "$@"
-
     dokku mongodb:delete "$APP"
     dokku delete "$APP"
-
-    ;;
+	;;
 
   help)
     cat && cat<<EOF
     arawak:install <app>       Create application
     arawak:remove <app>        Remove appliccation
-EOF   
-  ;;
+EOF
+    ;;
 
   *)
     exit $DOKKU_NOT_IMPLEMENTED_EXIT
