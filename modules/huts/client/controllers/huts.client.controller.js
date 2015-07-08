@@ -1,16 +1,18 @@
 'use strict';
 
 // Huts controller
-angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts', 'Socket',
-  function($scope, $stateParams, $location, Authentication, Huts, Socket) {
+angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts', 'Servers', 'Socket',
+  function($scope, $stateParams, $location, Authentication, Huts, Servers, Socket) {
     $scope.authentication = Authentication;
+		$scope.servers = Servers.query();
 
     // Create new Hut
     $scope.create = function() {
       // Create new Hut object
       var hut = new Huts({
         name: this.name,
-        product: this.product
+        product: this.product,
+				server: this.server
 
       });
 
@@ -20,6 +22,9 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
 
         // Clear form fields
         $scope.name = '';
+        $scope.product = '';
+        $scope.server = '';
+
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
       });

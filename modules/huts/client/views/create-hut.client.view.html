@@ -23,6 +23,18 @@
                   <option value="mysql">MySQL</option>
                   <option value="redis">Redis</option>
                 </select> -->
+
+                <input type="hidden" data-ng-model="server" id="server" class="form-control" placeholder="name" required>
+
+                <li ng-repeat="server in servers">
+                           <label>{{server.name}}
+                               <input type="radio" ng-model="$parent.server" name="server" value="{{server._id}}" required />
+                           </label>
+                       </li>
+
+
+
+
               </div>
 
                 <div class="form-group">

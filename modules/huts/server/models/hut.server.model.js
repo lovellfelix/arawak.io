@@ -24,6 +24,10 @@ var HutSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	server: {
+		type: Schema.ObjectId,
+		ref: 'Server'
+	},
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
