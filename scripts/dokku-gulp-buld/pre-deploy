@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+APP="$1";  IMAGE="dokku/$APP"
+
+
+RUN=$(cat <<EOF
+PATH=$PATH:/app/vendor/node/bin &&
+cd /app &&
+sleep 1
+echo '-----> Installing gulp'
+if [ -f "./node_modules/gulp/bin/gulp.js" ]
+then
+  echo 'gulp already installed. Skipping...'
+else
+  npm install gulp
+fi
+echo '-----> Runnging Tasks'
+if [ -f "./gulpfile.js" ]
+then
+  ./node_modules/gulp/bin/gulp.js build
+else
+  echo 'gulpfile.js is missing. No tasks to run...'
+fi
+EOF
+)
+
+id=$(docker run -d $IMAGE /bin/bash -c "$RUN")
+docker attach $id
+test $(docker wait $id) -eq 0
+docker commit $id $IMAGE > /dev/null
