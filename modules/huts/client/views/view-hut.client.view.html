@@ -6,7 +6,7 @@
 		<a class="btn btn-primary" href="/#!/huts/{{hut._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
+		<a class="btn btn-primary" data-ng-click="remove();deleteHut(hut.name);">
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
@@ -20,6 +20,7 @@
 	</small>
 
 	<h1>Application logs</h1>
+
 	<div class="panel-body">
 	<pre class="pre-scrollable pre-x-scrollable ng-binding">
 

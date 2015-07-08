@@ -22,6 +22,13 @@ module.exports = function(io, socket) {
 
     });
 
+    socket.on('deleteHut', function(req, res){
+
+    var name=req.name;
+    exec('delete '+name, 'dokku@arawak.space').pipe(process.stdout);
+
+    });
+
 
 
 
