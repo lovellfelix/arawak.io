@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 
 source "$(dirname $0)/../dokku_common"
 
-ARAWAK_REPOSITORY="https://github.com/heroku/node-js-sample"
+ARAWAK_REPOSITORY="https://github.com/arawak-io/cashew"
 
 case "$1" in
-  arawak:install)
-    verify_app_name "$2"
+  arawak:deploy)
+
     verify_max_args 2 "$@"
+    check_app_name "$2"
+
+
     info "Creating application..."
 
     dokku create "$APP"
@@ -22,11 +26,18 @@ case "$1" in
     dokku mongodb:link "$APP" "$APP"
 
     info "Creating environment variables..."
-    dokku config:set "$APP" "NODE_ENV=production"
+    # dokku config:set "$APP" "NODE_ENV=production"
+    echo "export NODE_ENV=production" > "$APP_DIR/ENV"
 
     info "Building application..."
 
-    dokku rebuild "$APP"
+    # dokku rebuild "$APP"
+
+    HEAD="$(git rev-parse "FETCH_HEAD")"
+    dokku rebuild "$APP" "$HEAD"
+    echo "$HEAD" > "refs/heads/master"
+
+
     info "Everything is done!"
     ;;
 
@@ -39,7 +50,7 @@ case "$1" in
 
   help)
     cat && cat<<EOF
-    arawak:install <app>       Create application
+    arawak:deploy <app>        Create application
     arawak:remove <app>        Remove appliccation
 EOF
     ;;
