@@ -17,7 +17,6 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'public/lib/angular-file-upload/angular-file-upload.min.js',
-				'public/lib/material-design-lite/material.min.js',
 				'public/lib/angular-gravatar/build/angular-gravatar.min.js'
 
 			]
