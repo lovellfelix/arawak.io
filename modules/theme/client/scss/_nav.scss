@@ -53,3 +53,25 @@
 .dropdown-link {
   min-width: 140px;
 }
+
+.header--nav__profile-image {
+	opacity: 0.8;
+	height: 28px;
+	width: 28px;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+
+.header--nav__profile__name {
+	text-transform: capitalize;
+
+}
+.open  .header--nav__profile-image,
+a:hover .header--nav__profile-image {
+	opacity: 1;
+}
+
+.user-header-dropdown-toggle {
+	padding-top: 11px !important;
+	padding-bottom: 11px !important;
+}
