@@ -1,8 +1,8 @@
 'use strict';
 
 // Huts controller
-angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts', 'Servers', 'Socket',
-  function($scope, $stateParams, $location, Authentication, Huts, Servers, Socket) {
+angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts', 'MyHuts', 'Servers', 'Socket',
+  function($scope, $stateParams, $location, Authentication, Huts, MyHuts, Servers, Socket) {
     $scope.authentication = Authentication;
 		$scope.servers = Servers.query();
 
@@ -62,6 +62,11 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
     // Find a list of Huts
     $scope.find = function() {
       $scope.huts = Huts.query();
+    };
+
+    // Find a list of Huts by user
+    $scope.findMyHuts = function() {
+      $scope.huts = MyHuts.query();
     };
 
     // Find existing Hut

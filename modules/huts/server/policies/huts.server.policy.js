@@ -25,16 +25,7 @@ exports.invokeRolesPolicies = function() {
 		roles: ['user'],
 		allows: [{
 			resources: '/api/huts',
-			permissions: ['get', 'post']
-		}, {
-			resources: '/api/huts/:hutId',
-			permissions: ['get']
-		}]
-	}, {
-		roles: ['guest'],
-		allows: [{
-			resources: '/api/huts',
-			permissions: ['get']
+			permissions: [ 'post']
 		}, {
 			resources: '/api/huts/:hutId',
 			permissions: ['get']
