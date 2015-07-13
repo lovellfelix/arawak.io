@@ -16,13 +16,13 @@ var HutSchema = new Schema({
 		required: 'Please fill hostname',
 		trim: true
 	},
-	product: {
-		type: String,
-		default: '',
-	},
 	created: {
 		type: Date,
 		default: Date.now
+	},
+	product: {
+		type: Schema.ObjectId,
+		ref: 'Product'
 	},
 	server: {
 		type: Schema.ObjectId,

@@ -74,7 +74,8 @@ exports.delete = function(req, res) {
  * List of Huts
  */
 exports.list = function(req, res) { Hut.find().sort('-created').populate('user', 'displayName')
-																															 .populate('server', 'hostname name').exec(function(err, huts) {
+																															 .populate('server', 'hostname name')
+																															 .populate('product', 'name').exec(function(err, huts) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -89,7 +90,8 @@ exports.list = function(req, res) { Hut.find().sort('-created').populate('user',
  * Hut middleware
  */
 exports.hutByID = function(req, res, next, id) { Hut.findById(id).populate('user', 'displayName')
-																																 .populate('server', 'hostname name').exec(function(err, hut) {
+																																 .populate('server', 'hostname name')
+																																 .populate('product', 'name').exec(function(err, hut) {
 		if (err) return next(err);
 		if (! hut) return next(new Error('Failed to load Hut ' + id));
 		req.hut = hut ;
@@ -117,7 +119,8 @@ exports.hutByID = function(req, res, next, id) { Hut.findById(id).populate('user
 
 exports.hutByUser = function(req, res) {
     Hut.find({'user': req.user.id}).sort('-created').populate('user', 'displayName')
-																										.populate('server', 'hostname name').exec(function(err, huts) {
+																										.populate('server', 'hostname name')
+																										.populate('product', 'name').exec(function(err, huts) {
         if (err) {
             return res.send(400, {
 							message: errorHandler.getErrorMessage(err)

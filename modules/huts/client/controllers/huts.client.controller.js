@@ -1,10 +1,11 @@
 'use strict';
 
 // Huts controller
-angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts', 'MyHuts', 'Servers', 'Socket',
-  function($scope, $stateParams, $location, Authentication, Huts, MyHuts, Servers, Socket) {
+angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts', 'MyHuts', 'Servers', 'Products', 'Socket',
+  function($scope, $stateParams, $location, Authentication, Huts, MyHuts, Servers, Products, Socket) {
     $scope.authentication = Authentication;
 		$scope.servers = Servers.query();
+		$scope.products = Products.query();
 
     // Create new Hut
     $scope.create = function() {
