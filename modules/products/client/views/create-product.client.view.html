@@ -1,0 +1,37 @@
+<section data-ng-controller="ProductsController">
+    <div class="page-header">
+        <h1>New Product</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <div class="controls">
+                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="controls">
+                        <input type="text" data-ng-model="version" id="version" class="form-control" placeholder="1.0-beta" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="controls">
+                        <input type="text" data-ng-model="repository" id="repository" class="form-control" placeholder="repository: https://github.com/arawak-io/arawak.io.git" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="controls">
+                        <textarea data-ng-model="description" id="description" placeholder="Product Description" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+        				<div data-ng-show="error" class="text-danger">
+        					<strong data-ng-bind="error"></strong>
+        				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>
