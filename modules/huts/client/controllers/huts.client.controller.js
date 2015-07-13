@@ -43,7 +43,7 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
         }
       } else {
         $scope.hut.$remove(function() {
-          $location.path('huts');
+          $location.path('dashboard');
         });
       }
 
