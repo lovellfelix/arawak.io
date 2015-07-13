@@ -11,8 +11,7 @@ angular.module('servers').controller('ServersController', ['$scope', '$statePara
 			var server = new Servers ({
 				name: this.name,
 				hostname: this.hostname,
-				username: this.username,
-				password: this.password
+				region: this.region
 			});
 
 			// Redirect after save
@@ -22,8 +21,7 @@ angular.module('servers').controller('ServersController', ['$scope', '$statePara
 				// Clear form fields
 				$scope.name = '';
 				$scope.hostname = '';
-				$scope.username = '';
-				$scope.password = '';
+				$scope.region = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
