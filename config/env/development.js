@@ -18,7 +18,8 @@ module.exports = {
 		}
 	},
 	app: {
-		title: 'MEAN.JS - Development Environment'
+		title: 'MEAN.JS - Development Environment',
+        livereload: true
 	},
 	facebook: {
         clientID: process.env.FACEBOOK_ID || 'APP_ID',
