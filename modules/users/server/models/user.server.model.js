@@ -5,8 +5,9 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
+	appRoot = require('app-root-path'),
 	stripeCustomer = require('./plugins/stripe-customer'),
-	config = require('../../../../config/config'),
+	config = require(appRoot + '/config/config'),
 	crypto = require('crypto'),
   bcrypt = require('bcrypt-nodejs');
 

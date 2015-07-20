@@ -1,7 +1,8 @@
 /*jshint -W058 */
 'use strict';
 
-var config = require('../../../../../config/config'),
+var appRoot = require('app-root-path'),
+config = require(appRoot + '/config/config'),
 Stripe = require('stripe')(config.stripeOptions.apiKey);
 
 module.exports = exports = function stripeCustomer (schema, options) {
