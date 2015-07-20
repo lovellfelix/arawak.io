@@ -27,7 +27,7 @@ module.exports.initLocalVariables = function (app) {
 	// Setting application local variables
 	app.locals.title = config.app.title;
 	app.locals.description = config.app.description;
-	app.locals.livereload = config.app.livereload;
+	app.locals.livereload = config.livereload;
 	app.locals.secure = config.secure;
 	app.locals.keywords = config.app.keywords;
 	app.locals.googleAnalyticsTrackingID = config.app.googleAnalyticsTrackingID;
