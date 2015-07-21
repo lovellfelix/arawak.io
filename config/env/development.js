@@ -1,10 +1,11 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/arawak-space',
-	options: {
-		user: '',
-		pass: ''
+	db: {
+		uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/arawak-space',
+		options: {
+			user: '',
+			pass: ''
 		}
 	},
 	log: {
@@ -17,7 +18,7 @@ module.exports = {
 		}
 	},
 	app: {
-		title: 'Arawak - Development Environment'
+				title: 'Arawak - Development Environment'
 	},
 	facebook: {
         clientID: process.env.FACEBOOK_ID || 'APP_ID',
@@ -44,38 +45,46 @@ module.exports = {
         clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
         callbackURL: '/api/auth/github/callback'
     },
-	mailer: {
-		from: process.env.MAILER_FROM || 'Arawak',
-		options: {
-			service: process.env.MAILER_SERVICE_PROVIDER || 'mailgun',
-			auth: {
-				user: process.env.MAILER_EMAIL_ID || 'postmaster@arawak.io',
-				pass: process.env.MAILER_PASSWORD || '6419c93af51af068b671c02e288a0934'
+    paypal: {
+        clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
+        clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
+        callbackURL: '/api/auth/paypal/callback',
+        sandbox: true
+    },
+		mailer: {
+			from: process.env.MAILER_FROM || 'Arawak',
+			options: {
+				service: process.env.MAILER_SERVICE_PROVIDER || 'mailgun',
+				auth: {
+					user: process.env.MAILER_EMAIL_ID || 'postmaster@arawak.io',
+					pass: process.env.MAILER_PASSWORD || '6419c93af51af068b671c02e288a0934'
+				}
+			}
+		},
+	stripeOptions: {
+			apiKey: process.env.STRIPE_KEY || 'sk_test_kaVJ6FqJRCkecspVho9K7u3q',
+			stripePubKey: process.env.STRIPE_PUB_KEY || 'pk_test_XdVDGxpniL8niWpo2N8pp5E5',
+			defaultPlan: 'free',
+			plans: ['free', 'silver', 'gold', 'platinum'],
+			planData: {
+				'free': {
+					name: 'Free',
+					price: 0
+				},
+				'silver': {
+					name: 'Silver',
+					price: 9
+				},
+				'gold': {
+					name: 'Gold',
+					price: 19
+				},
+				'platinum': {
+					name: 'Platinum',
+					price: 29
+				}
 			}
 		}
-	},
 
-    stripeOptions: {
-        apiKey: process.env.STRIPE_KEY || 'sk_test_kaVJ6FqJRCkecspVho9K7u3q',
-        stripePubKey: process.env.STRIPE_PUB_KEY || 'pk_test_XdVDGxpniL8niWpo2N8pp5E5',
-        defaultPlan: 'free',
-        plans: ['free', 'silver', 'gold', 'platinum'],
-        planData: {
-          'free': {
-            name: 'Free',
-            price: 0
-          },
-          'silver': {
-            name: 'Silver',
-            price: 9
-          },
-          'gold': {
-            name: 'Gold',
-            price: 19
-          },
-          'platinum': {
-            name: 'Platinum',
-            price: 29
-          }
-        }
-      }
+
+};
