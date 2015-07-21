@@ -5,7 +5,11 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
-	crypto = require('crypto');
+	appRoot = require('app-root-path'),
+	stripeCustomer = require('./plugins/stripe-customer'),
+	config = require(appRoot + '/config/config'),
+	crypto = require('crypto'),
+  bcrypt = require('bcrypt-nodejs');
 
 /**
  * A Validation function for local strategy properties
@@ -44,6 +48,8 @@ var UserSchema = new Schema({
 	email: {
 		type: String,
 		trim: true,
+		unique: true,
+		lowercase: true,
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
 		match: [/.+\@.+\..+/, 'Please fill a valid email address']
@@ -95,6 +101,11 @@ var UserSchema = new Schema({
   	}
 });
 
+
+	var stripeOptions = config.stripeOptions;
+
+	UserSchema.plugin(stripeCustomer, stripeOptions);
+
 /**
  * Hook a pre save method to hash the password
  */
@@ -124,19 +135,6 @@ UserSchema.methods.hashPassword = function(password) {
 UserSchema.methods.authenticate = function(password) {
 	return this.password === this.hashPassword(password);
 };
-
-
-UserSchema.methods.gravatar = function(size) {
-  if (!size) size = 200;
-
-  if (!this.email) {
-    return 'https://gravatar.com/avatar/?s=' + size + '&d=retro';
-  }
-
-  var md5 = crypto.createHash('md5').update(this.email).digest('hex');
-  return 'https://gravatar.com/avatar/' + md5 + '?s=' + size + '&d=retro';
-};
-
 
 /**
  * Find possible not used username
