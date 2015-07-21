@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
 	stripeCustomer = require('./plugins/stripe-customer'),
 	config = require(appRoot + '/config/config'),
 	crypto = require('crypto'),
+	validator = require('validator'),
   bcrypt = require('bcrypt-nodejs');
 
 /**
@@ -22,7 +23,14 @@ var validateLocalStrategyProperty = function(property) {
  * A Validation function for local strategy password
  */
 var validateLocalStrategyPassword = function(password) {
-	return (this.provider !== 'local' || (password && password.length > 6));
+	return (this.provider !== 'local' || validator.isLength(password, 6));
+};
+
+/**
+ * A Validation function for local strategy email
+ */
+var validateLocalStrategyEmail = function(email) {
+	return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email));
 };
 
 /**
@@ -49,14 +57,12 @@ var UserSchema = new Schema({
 		type: String,
 		trim: true,
 		unique: true,
-		lowercase: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
-		match: [/.+\@.+\..+/, 'Please fill a valid email address']
+		validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
 	},
 	username: {
 		type: String,
-		unique: 'testing error message',
+		unique: 'Username already exists',
 		required: 'Please fill in a username',
 		trim: true
 	},
@@ -110,7 +116,7 @@ var UserSchema = new Schema({
  * Hook a pre save method to hash the password
  */
 UserSchema.pre('save', function(next) {
-	if (this.password && this.password.length > 6) {
+	if (this.password && this.isModified('password') && this.password.length > 6) {
 		this.salt = crypto.randomBytes(16).toString('base64');
 		this.password = this.hashPassword(this.password);
 	}

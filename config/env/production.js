@@ -1,7 +1,23 @@
 'use strict';
 
 module.exports = {
+secure: true,
+    port: process.env.PORT || 8443,
     db: process.env.MONGODB_URL || process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
+    options: {
+        user: '',
+        pass: ''
+      }
+    },
+    log: {
+      // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
+      format: 'combined',
+      // Stream defaults to process.stdout
+      // Uncomment to enable logging to a log on the file system
+      options: {
+        stream: 'access.log'
+      }
+    },
     facebook: {
         clientID: process.env.FACEBOOK_ID || 'APP_ID',
         clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
@@ -26,6 +42,12 @@ module.exports = {
         clientID: process.env.GITHUB_ID || 'APP_ID',
         clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
         callbackURL: '/api/auth/github/callback'
+    },
+    paypal: {
+      clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
+      clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
+      callbackURL: '/api/auth/paypal/callback',
+      sandbox: false
     },
     mailer: {
         from: process.env.MAILER_FROM || 'Arawak',

@@ -21,9 +21,9 @@ var config = require('../config'),
 	path = require('path'),
 	cors = require('cors');
 
-var corsOptions = {
-  origin: '*'
-};
+	var corsOptions = {
+	  origin: '*'
+	};
 
 /**
  * Initialize local variables
@@ -32,6 +32,7 @@ module.exports.initLocalVariables = function (app) {
 	// Setting application local variables
 	app.locals.title = config.app.title;
 	app.locals.description = config.app.description;
+	app.locals.secure = config.secure;
 	app.locals.keywords = config.app.keywords;
 	app.locals.googleAnalyticsTrackingID = config.app.googleAnalyticsTrackingID;
 	app.locals.facebookAppId = config.facebook.clientID;
@@ -60,7 +61,7 @@ module.exports.initMiddleware = function (app) {
 	// Should be placed before express.static
 	app.use(compress({
 		filter: function (req, res) {
-			return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
+			return (/json|text|javascript|css|font|svg/).test(res.getHeader('Content-Type'));
 		},
 		level: 9
 	}));
@@ -183,7 +184,6 @@ module.exports.initModulesServerRoutes = function (app) {
  * Configure error handling
  */
 module.exports.initErrorRoutes = function (app) {
-	// Assume 'not found' in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
 	app.use(function (err, req, res, next) {
 		// If the error object doesn't exists
 		if (!err) return next();
@@ -193,12 +193,6 @@ module.exports.initErrorRoutes = function (app) {
 
 		// Redirect to error page
 		res.redirect('/server-error');
-	});
-
-	// Assume 404 since no middleware responded
-	app.use(function (req, res) {
-		// Redirect to not found page
-		res.redirect('/not-found');
 	});
 };
 

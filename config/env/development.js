@@ -2,6 +2,20 @@
 
 module.exports = {
 	db: 'mongodb://localhost/arawak-space',
+	options: {
+		user: '',
+		pass: ''
+		}
+	},
+	log: {
+		// Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
+		format: 'dev',
+		// Stream defaults to process.stdout
+		// Uncomment to enable logging to a log on the file system
+		options: {
+			//stream: 'access.log'
+		}
+	},
 	app: {
 		title: 'Arawak - Development Environment'
 	},
@@ -65,4 +79,3 @@ module.exports = {
           }
         }
       }
-};
