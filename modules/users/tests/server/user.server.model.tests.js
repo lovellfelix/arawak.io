@@ -56,7 +56,7 @@ describe('User Model Unit Tests:', function() {
 				user2.save(function(err) {
 					should.exist(err);
 					done();
-				});	
+				});
 			});
 		});
 
@@ -64,6 +64,16 @@ describe('User Model Unit Tests:', function() {
 			user.firstName = '';
 			return user.save(function(err) {
 				should.exist(err);
+				done();
+			});
+		});
+
+		it('should confirm that saving user model doesnt change the password', function(done) {
+			user.firstName = 'test';
+			var passwordBefore = user.password;
+			return user.save(function(err) {
+				var passwordAfter = user.password;
+				passwordBefore.should.equal(passwordAfter);
 				done();
 			});
 		});
