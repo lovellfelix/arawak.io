@@ -17,7 +17,8 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'public/lib/angular-file-upload/angular-file-upload.min.js',
-				'public/lib/angular-gravatar/build/angular-gravatar.min.js'
+				'public/lib/angular-gravatar/build/angular-gravatar.min.js',
+				'https://js.stripe.com/v2/'
 
 			]
 		},

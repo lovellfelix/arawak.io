@@ -9,6 +9,10 @@ angular.module('users').config(['$stateProvider',
 			url: '/security',
 			templateUrl: 'modules/users/views/settings/security.client.view.html'
 		}).
+		 state('settings.billing', {
+			url: '/billing',
+			templateUrl: 'modules/users/views/settings/update-credit-card.client.view.html'
+		  }).
 			state('settings', {
 				abstract: true,
 				url: '/settings',
