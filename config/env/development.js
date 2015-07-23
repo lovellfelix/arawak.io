@@ -18,7 +18,8 @@ module.exports = {
 		}
 	},
 	app: {
-				title: 'Arawak - Development Environment'
+				title: 'Arawak - Development Environment',
+				livereload: true
 	},
 	facebook: {
         clientID: process.env.FACEBOOK_ID || 'APP_ID',
@@ -85,6 +86,4 @@ module.exports = {
 				}
 			}
 		}
-	},
-	livereload: true
 };
