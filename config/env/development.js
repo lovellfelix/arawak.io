@@ -55,18 +55,18 @@ module.exports = {
         sandbox: true
     },
 		mailer: {
-			from: process.env.MAILER_FROM || 'Arawak',
+			from: process.env.MAILER_FROM,
 			options: {
-				service: process.env.MAILER_SERVICE_PROVIDER || 'mailgun',
+				service: process.env.MAILER_SERVICE_PROVIDER,
 				auth: {
-					user: process.env.MAILER_EMAIL_ID || 'postmaster@arawak.io',
-					pass: process.env.MAILER_PASSWORD || '6419c93af51af068b671c02e288a0934'
+					user: process.env.MAILER_EMAIL_ID,
+					pass: process.env.MAILER_PASSWORD
 				}
 			}
 		},
 	stripeOptions: {
-			apiKey: process.env.STRIPE_KEY || 'sk_test_kaVJ6FqJRCkecspVho9K7u3q',
-			stripePubKey: process.env.STRIPE_PUB_KEY || 'pk_test_XdVDGxpniL8niWpo2N8pp5E5',
+			apiKey: process.env.STRIPE_KEY,
+			stripePubKey: process.env.STRIPE_PUB_KEY,
 			defaultPlan: 'free',
 			plans: ['free', 'silver', 'gold', 'platinum'],
 			planData: {
