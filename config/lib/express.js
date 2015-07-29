@@ -41,6 +41,7 @@ module.exports.initLocalVariables = function (app) {
 	app.locals.livereload = config.livereload;
 	app.locals.logo = config.logo;
 	app.locals.favicon = config.favicon;
+	app.locals.themeModule = config.themeModule;
 	app.locals.stripePubKey = config.stripeOptions.stripePubKey;
 
 	// Passing the request url to environment locals
