@@ -9,8 +9,8 @@
     "url": ""
   },
   "engines": {
-    "node": ">=0.10.28",
-    "npm": ">=1.4.28"
+    "node": "0.12.x",
+    "npm": "2.12.x"
   },
   "scripts": {
     "start": "gulp",
