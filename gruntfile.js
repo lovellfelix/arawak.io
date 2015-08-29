@@ -4,155 +4,156 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	defaultAssets = require('./config/assets/default'),
-	testAssets = require('./config/assets/test'),
-	fs = require('fs');
+  defaultAssets = require('./config/assets/default'),
+  testAssets = require('./config/assets/test'),
+  fs = require('fs'),
+  path = require('path');
 
 module.exports = function (grunt) {
-	// Project Configuration
-	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
-		env: {
-			test: {
-				NODE_ENV: 'test'
-			},
-			dev: {
-				NODE_ENV: 'development'
-			},
-			prod: {
-				NODE_ENV: 'production'
-			}
-		},
-		watch: {
-			serverViews: {
-				files: defaultAssets.server.views,
-				options: {
-					livereload: true
-				}
-			},
-			serverJS: {
-				files: _.union(defaultAssets.server.gruntConfig, defaultAssets.server.allJS),
-				tasks: ['jshint'],
-				options: {
-					livereload: true
-				}
-			},
-			clientViews: {
-				files: defaultAssets.client.views,
-				options: {
-					livereload: true
-				}
-			},
-			clientJS: {
-				files: defaultAssets.client.js,
-				tasks: ['jshint'],
-				options: {
-					livereload: true
-				}
-			},
-			clientCSS: {
-				files: defaultAssets.client.css,
-				tasks: ['csslint'],
-				options: {
-					livereload: true
-				}
-			},
-			clientSCSS: {
-				files: defaultAssets.client.sass,
-				tasks: ['sass', 'csslint'],
-				options: {
-					livereload: true
-				}
-			},
-			clientLESS: {
-				files: defaultAssets.client.less,
-				tasks: ['less', 'csslint'],
-				options: {
-					livereload: true
-				}
-			}
-		},
-		nodemon: {
-			dev: {
-				script: 'server.js',
-				options: {
-					nodeArgs: ['--debug'],
-					ext: 'js,html',
-					watch: _.union(defaultAssets.server.gruntConfig, defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
-				}
-			}
-		},
-		concurrent: {
-			default: ['nodemon', 'watch'],
-			debug: ['nodemon', 'watch', 'node-inspector'],
-			options: {
-				logConcurrentOutput: true
-			}
-		},
-		jshint: {
-			all: {
-				src: _.union(defaultAssets.server.gruntConfig, defaultAssets.server.allJS, defaultAssets.client.js, testAssets.tests.server, testAssets.tests.client, testAssets.tests.e2e),
-				options: {
-					jshintrc: true,
-					node: true,
-					mocha: true,
-					jasmine: true
-				}
-			}
-		},
-		csslint: {
-			options: {
-				csslintrc: '.csslintrc'
-			},
-			all: {
-				src: defaultAssets.client.css
-			}
-		},
-		ngAnnotate: {
-			production: {
-				files: {
-					'public/dist/application.js': defaultAssets.client.js
-				}
-			}
-		},
-		uglify: {
-			production: {
-				options: {
-					mangle: false
-				},
-				files: {
-					'public/dist/application.min.js': 'public/dist/application.js'
-				}
-			}
-		},
-		cssmin: {
-			combine: {
-				files: {
-					'public/dist/application.min.css': defaultAssets.client.css
-				}
-			}
-		},
-		sass: {
-			dist: {
-				files: [{
-					expand: true,
-					src: defaultAssets.client.sass,
-					ext: '.css',
-					rename: function(base, src) {
-						return  src.replace('/scss/', '/css/');
-					}
+  // Project Configuration
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    env: {
+      test: {
+        NODE_ENV: 'test'
+      },
+      dev: {
+        NODE_ENV: 'development'
+      },
+      prod: {
+        NODE_ENV: 'production'
+      }
+    },
+    watch: {
+      serverViews: {
+        files: defaultAssets.server.views,
+        options: {
+          livereload: true
+        }
+      },
+      serverJS: {
+        files: _.union(defaultAssets.server.gruntConfig, defaultAssets.server.allJS),
+        tasks: ['jshint'],
+        options: {
+          livereload: true
+        }
+      },
+      clientViews: {
+        files: defaultAssets.client.views,
+        options: {
+          livereload: true
+        }
+      },
+      clientJS: {
+        files: defaultAssets.client.js,
+        tasks: ['jshint'],
+        options: {
+          livereload: true
+        }
+      },
+      clientCSS: {
+        files: defaultAssets.client.css,
+        tasks: ['csslint'],
+        options: {
+          livereload: true
+        }
+      },
+      clientSCSS: {
+        files: defaultAssets.client.sass,
+        tasks: ['sass', 'csslint'],
+        options: {
+          livereload: true
+        }
+      },
+      clientLESS: {
+        files: defaultAssets.client.less,
+        tasks: ['less', 'csslint'],
+        options: {
+          livereload: true
+        }
+      }
+    },
+    nodemon: {
+      dev: {
+        script: 'server.js',
+        options: {
+          nodeArgs: ['--debug'],
+          ext: 'js,html',
+          watch: _.union(defaultAssets.server.gruntConfig, defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
+        }
+      }
+    },
+    concurrent: {
+      default: ['nodemon', 'watch'],
+      debug: ['nodemon', 'watch', 'node-inspector'],
+      options: {
+        logConcurrentOutput: true
+      }
+    },
+    jshint: {
+      all: {
+        src: _.union(defaultAssets.server.gruntConfig, defaultAssets.server.allJS, defaultAssets.client.js, testAssets.tests.server, testAssets.tests.client, testAssets.tests.e2e),
+        options: {
+          jshintrc: true,
+          node: true,
+          mocha: true,
+          jasmine: true
+        }
+      }
+    },
+    csslint: {
+      options: {
+        csslintrc: '.csslintrc'
+      },
+      all: {
+        src: defaultAssets.client.css
+      }
+    },
+    ngAnnotate: {
+      production: {
+        files: {
+          'public/dist/application.js': defaultAssets.client.js
+        }
+      }
+    },
+    uglify: {
+      production: {
+        options: {
+          mangle: false
+        },
+        files: {
+          'public/dist/application.min.js': 'public/dist/application.js'
+        }
+      }
+    },
+    cssmin: {
+      combine: {
+        files: {
+          'public/dist/application.min.css': defaultAssets.client.css
+        }
+      }
+    },
+    sass: {
+      dist: {
+        files: [{
+          expand: true,
+          src: defaultAssets.client.sass,
+          ext: '.css',
+          rename: function (base, src) {
+            return src.replace('/scss/', '/css/');
+          }
 				}]
-			}
-		},
-		less: {
-			dist: {
-				files: [{
-					expand: true,
-					src: defaultAssets.client.less,
-					ext: '.css',
-					rename: function(base, src) {
-						return  src.replace('/less/', '/css/');
-					}
+      }
+    },
+    less: {
+      dist: {
+        files: [{
+          expand: true,
+          src: defaultAssets.client.less,
+          ext: '.css',
+          rename: function (base, src) {
+            return src.replace('/less/', '/css/');
+          }
 				}]
 			}
 		},
