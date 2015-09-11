@@ -1,5 +1,7 @@
 'use strict';
 
+var stripeEnvConfig = require('./stripe');
+
 module.exports = {
   secure: {
     ssl: true,
