@@ -7,11 +7,8 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   crypto = require('crypto'),
   validator = require('validator'),
-  owasp = require('owasp-password-strength-test'),
-	appRoot = require('app-root-path'),
-	stripeCustomer = require('./plugins/stripe-customer'),
-	config = require(appRoot + '/config/config'),
-	bcrypt = require('bcrypt-nodejs');
+  owasp = require('owasp-password-strength-test');
+	//stripeCustomer = require('./plugins/stripe-customer');
 
 /**
  * A Validation function for local strategy properties
