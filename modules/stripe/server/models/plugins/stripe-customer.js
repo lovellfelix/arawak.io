@@ -2,7 +2,7 @@
 'use strict';
 
 var path = require('path'),
-    config = require(path.resolve('./config/config')),
+    config = require(path.resolve('./modules/stripe/server/config/stripe.server.config')),
     Stripe = require('stripe')(config.stripeOptions.apiKey);
 
 module.exports = exports = function stripeCustomer (schema, options) {
