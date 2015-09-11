@@ -1,6 +1,8 @@
 'use strict';
 
-var defaultEnvConfig = require('./default');
+var defaultEnvConfig = require('./default'),
+		 stripeEnvConfig = require('./stripe');
+
 
 module.exports = {
 	db: {
