@@ -1,6 +1,6 @@
 'use strict';
 
-var stripeEnvConfig = require('./stripe');
+//var stripeEnvConfig = require('./stripe');
 
 module.exports = {
   secure: {
@@ -68,5 +68,29 @@ module.exports = {
       }
     }
   },
-  seedDB: process.env.MONGO_SEED || false
+  seedDB: process.env.MONGO_SEED || false,
+  stripeOptions: {
+      apiKey: process.env.STRIPE_KEY || 'STRIPE_KEY',
+      stripePubKey: process.env.STRIPE_PUB_KEY || 'STRIPE_PUB_KEY',
+      defaultPlan: 'free',
+      plans: ['free', 'silver', 'gold', 'platinum'],
+      planData: {
+        'free': {
+          name: 'Free',
+          price: 0
+        },
+        'silver': {
+          name: 'Silver',
+          price: 9
+        },
+        'gold': {
+          name: 'Gold',
+          price: 19
+        },
+        'platinum': {
+          name: 'Platinum',
+          price: 29
+        }
+      }
+    }
 };
