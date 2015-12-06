@@ -90,13 +90,13 @@ var knownEvents = {
   'customer.subscription.deleted': function(req, res, next) {
     console.log(req.stripeEvent.type + ': event processed');
 
-    if(req.stripeEvent.data && req.stripeEvent.data.object && req.stripeEvent.data.object.customer){
+    if (req.stripeEvent.data && req.stripeEvent.data.object && req.stripeEvent.data.object.customer) {
       // find user where stripeEvent.data.object.customer
       User.findOne({
         'stripe.customerId': req.stripeEvent.data.object.customer
-      }, function (err, user) {
+      }, function(err, user) {
         if (err) return next(err);
-        if(!user){
+        if (!user) {
           // user does not exist, no need to process
           return res.status(200).end();
         } else {
@@ -213,7 +213,7 @@ var knownEvents = {
 };
 
 module.exports = function(req, res, next) {
-  if(req.stripeEvent && req.stripeEvent.type && knownEvents[req.stripeEvent.type]){
+  if (req.stripeEvent && req.stripeEvent.type && knownEvents[req.stripeEvent.type]) {
     knownEvents[req.stripeEvent.type](req, res, next);
   } else {
     return next(new Error('Stripe Event not found'));

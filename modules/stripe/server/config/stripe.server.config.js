@@ -1,14 +1,14 @@
 'user strict';
 
 /**
-* Module dependencies
-*/
+ * Module dependencies
+ */
 var path = require('path'),
-config = require(path.resolve('./config/config'));
+  config = require(path.resolve('./config/config'));
 
 /**
-* Module init function.
-*/
-module.exports = function (app, db) {
+ * Module init function.
+ */
+module.exports = function(app, db) {
 
 };

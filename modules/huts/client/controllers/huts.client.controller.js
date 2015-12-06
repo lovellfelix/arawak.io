@@ -4,8 +4,8 @@
 angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Huts', 'MyHuts', 'Servers', 'Products', 'Socket',
   function($scope, $stateParams, $location, Authentication, Huts, MyHuts, Servers, Products, Socket) {
     $scope.authentication = Authentication;
-		$scope.servers = Servers.query();
-		$scope.products = Products.query();
+    $scope.servers = Servers.query();
+    $scope.products = Products.query();
 
     // Create new Hut
     $scope.create = function() {
@@ -13,7 +13,7 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
       var hut = new Huts({
         name: this.name,
         product: this.product,
-				server: this.server
+        server: this.server
 
       });
 
@@ -89,7 +89,7 @@ angular.module('huts').controller('HutsController', ['$scope', '$stateParams', '
       });
 
     };
-		// Delete application container
+    // Delete application container
     $scope.deleteHut = function(name) {
       Socket.emit('deleteHut', {
         name: name
